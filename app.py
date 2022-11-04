@@ -15,10 +15,14 @@ holistic = mp_holistic.Holistic(
     min_tracking_confidence=0.5
 )
 
-@st.cache
+
 MODEL_PATH = 'models/modelFrases.h5'
 # Cargamos el modelo preentrenado
-model = load_model(MODEL_PATH)
+
+@st.cache
+def load_model():
+	  return load_model(MODEL_PATH)
+model = load_model()
 
 actions = np.array(['por favor','feliz','mucho gusto','perdoname','hola','adios','gracias','yo','ayuda'])
 
