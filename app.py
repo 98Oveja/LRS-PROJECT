@@ -15,6 +15,7 @@ holistic = mp_holistic.Holistic(
     min_tracking_confidence=0.5
 )
 
+@st.cache
 MODEL_PATH = 'models/modelFrases.h5'
 # Cargamos el modelo preentrenado
 model = load_model(MODEL_PATH)
@@ -101,7 +102,7 @@ def process(image):
                 sentencia = sentencia[-5:]
 
         cv2.rectangle(image, (0,440), (640, 580), (245, 117, 16), -1)
-        cv2.putText(image, ' '.join(traduction), (240,470), 
+        cv2.putText(image, ' '.join(traduction), (220,470), 
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
     return image
@@ -123,5 +124,5 @@ webrtc_ctx = webrtc_streamer(
     async_processing=True,
 )
 
-st.markdown("Repositorio del proyecto [aquí](https://github.com/98Oveja/project-lrs)")
+st.markdown("Repositorio del proyecto [aquí](https://github.com/98Oveja/LRS-PROJECT)")
 
