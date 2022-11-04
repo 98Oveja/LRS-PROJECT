@@ -21,7 +21,7 @@ MODEL_PATH = 'models/modelFrases.h5'
 
 @st.cache
 def load_model():
-	  return load_model(MODEL_PATH)
+	return load_model(MODEL_PATH)
 model = load_model()
 
 actions = np.array(['por favor','feliz','mucho gusto','perdoname','hola','adios','gracias','yo','ayuda'])
