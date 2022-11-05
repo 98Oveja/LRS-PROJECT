@@ -18,13 +18,8 @@ holistic = mp_holistic.Holistic(
 
 MODEL_PATH = 'models/modelFrases.h5'
 # Cargamos el modelo preentrenado
-@st.cache(allow_output_mutation=True)
-def my_load_model(model_name):
-    model = load_model(model_name)
-    
-    return model
 
-model = my_load_model(MODEL_PATH)
+model = load_model(MODEL_PATH)
 
 actions = np.array(['por favor','feliz','mucho gusto','perdoname','hola','adios','gracias','yo','ayuda'])
 
@@ -67,7 +62,7 @@ traduction = ''
 
 
 def process(image):
-    global secuencia, sentencia, predicciones, threshold, traduction, model, session
+    global secuencia, sentencia, predicciones, threshold, traduction
 
     # with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
     #     # while True:
