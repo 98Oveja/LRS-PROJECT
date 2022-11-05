@@ -19,14 +19,12 @@ holistic = mp_holistic.Holistic(
 MODEL_PATH = 'models/modelFrases.h5'
 # Cargamos el modelo preentrenado
 @st.cache(allow_output_mutation=True)
-def my_load_model():
-    model = load_model(MODEL_PATH)
-    # model._make_predict_function()
-    # model.summary()  # included to make it visible when model is reloaded
-    session = K.get_session()
-    return model, session
+def my_load_model(model_name):
+    model = load_model(model_name)
+    
+    return model
 
-model, session = my_load_model()
+model = my_load_model(MODEL_PATH)
 
 actions = np.array(['por favor','feliz','mucho gusto','perdoname','hola','adios','gracias','yo','ayuda'])
 
@@ -93,7 +91,6 @@ def process(image):
     secuencia = secuencia[-30:]
 
     if len(secuencia) == 30:
-        K.set_session(session)
         resultado = model.predict(np.expand_dims(secuencia, axis=0))[0]
         print(actions[np.argmax(resultado)])
         predicciones.append(np.argmax(resultado))
