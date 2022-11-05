@@ -1,6 +1,6 @@
 from tensorflow.keras.models import load_model
 from streamlit_webrtc import VideoProcessorBase, RTCConfiguration,webrtc_streamer, WebRtcMode
-
+from keras import backend as K
 import streamlit as st
 import mediapipe as mp
 import numpy as np
@@ -18,7 +18,15 @@ holistic = mp_holistic.Holistic(
 
 MODEL_PATH = 'models/modelFrases.h5'
 # Cargamos el modelo preentrenado
-model = load_model(MODEL_PATH)
+@st.cache(allow_output_mutation=True)
+def my_load_model():
+    model = load_model(MODEL_PATH)
+    # model._make_predict_function()
+    # model.summary()  # included to make it visible when model is reloaded
+    session = K.get_session()
+    return model, session
+
+model, session = my_load_model()
 
 actions = np.array(['por favor','feliz','mucho gusto','perdoname','hola','adios','gracias','yo','ayuda'])
 
@@ -61,7 +69,7 @@ traduction = ''
 
 
 def process(image):
-    global secuencia, sentencia, predicciones, threshold, traduction
+    global secuencia, sentencia, predicciones, threshold, traduction, model, session
 
     # with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
     #     # while True:
@@ -85,6 +93,7 @@ def process(image):
     secuencia = secuencia[-30:]
 
     if len(secuencia) == 30:
+        K.set_session(session)
         resultado = model.predict(np.expand_dims(secuencia, axis=0))[0]
         print(actions[np.argmax(resultado)])
         predicciones.append(np.argmax(resultado))
