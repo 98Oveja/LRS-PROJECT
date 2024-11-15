@@ -2,8 +2,8 @@ tensorflow
 keras
 mediapipe
 numpy
-streamlit
 opencv-python
-streamlit-webrtc==0.44.0
+streamlit==1.22.0
+streamlit-webrtc==0.43.0
 av==9.2.0
 pip
