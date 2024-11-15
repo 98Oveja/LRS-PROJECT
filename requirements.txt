@@ -3,7 +3,7 @@ keras
 mediapipe
 numpy
 opencv-python
-streamlit==1.22.0
-streamlit-webrtc==0.43.0
+streamlit
+streamlit-webrtc
 av==9.2.0
 pip
