@@ -4,6 +4,6 @@ mediapipe
 numpy
 opencv-python
 streamlit
-streamlit-webrtc
+treamlit-webrtc==0.39.0
 av==9.2.0
 pip
